@@ -1,0 +1,96 @@
+[
+    {
+        "topic": "Core Functions",
+        "question": "You have two tables. The first contains 'ProductID' and 'ProductName'. The second contains 'ProductID' and 'SaleAmount'. How would you bring the 'ProductName' into the second table to match each sale?",
+        "rubric": "Excellent (5/5): Recommends VLOOKUP or INDEX/MATCH and correctly identifies the lookup value, table array, and column index. Good (3/5): Correctly identifies VLOOKUP as the function but is unclear on the arguments. Poor (1/5): Suggests a manual copy-paste method."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "What is a major limitation of the VLOOKUP function, and what function combination is often used to overcome it?",
+        "rubric": "Excellent (5/5): Identifies that VLOOKUP cannot look up values in columns to the left of the lookup column and names INDEX/MATCH as the more flexible alternative. Good (3/5): Mentions the left-lookup limitation but doesn't know the alternative. Poor (1/5): Is unaware of any limitations."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "You need to count the number of sales that were made in the 'North' region for amounts greater than $500. Which function would you use?",
+        "rubric": "Excellent (5/5): Correctly identifies COUNTIFS as the ideal function for handling multiple criteria. Good (3/5): Suggests filtering the data and then using COUNT or SUBTOTAL, which is less efficient. Poor (1/5): Suggests manually counting."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "How would you write a formula to display the word 'High' if a sale in cell A2 is greater than $1000, 'Medium' if it's between $500 and $1000, and 'Low' if it's less than $500?",
+        "rubric": "Excellent (5/5): Describes a nested IF statement or the more modern IFS function with the correct logical structure. Good (3/5): Correctly structures a simple IF statement for one condition (e.g., 'High' vs 'Low') but struggles with nesting. Poor (1/5): Does not know how to use logical functions."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "What is the difference between relative, absolute, and mixed cell references, and why is this important?",
+        "rubric": "Excellent (5/5): Clearly explains all three (e.g., A1, $A$1, $A1/A$1) and correctly states that absolute references are crucial for preventing errors when dragging formulas across multiple cells. Good (3/5): Understands the concept of locking cells with '$' but is unclear on the difference between absolute and mixed. Poor (1/5): Is unaware of cell references."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "You have a text string in cell A1: '   New Delhi - IN  '. How would you clean this to get just 'New Delhi - IN' without the extra spaces?",
+        "rubric": "Excellent (5/5): Recommends the TRIM function to remove leading/trailing spaces. Good (3/5): Suggests manual deletion. Poor (1/5): Unsure how to handle extra whitespace."
+    },
+    {
+        "topic": "Data Aggregation",
+        "question": "You are given a large table of sales data with columns for 'Region', 'Product_Category', and 'Sale_Amount'. Describe the steps to create a summary report showing total sales for each category, broken down by region.",
+        "rubric": "Excellent (5/5): Immediately identifies a PivotTable as the best tool and describes the steps: insert PivotTable, drag 'Region' to Columns, 'Product_Category' to Rows, and 'Sale_Amount' to Values. Good (3/5): Describes a more manual process like sorting and using the Subtotal feature. Poor (1/5): Suggests using formulas like SUMIFS, which is highly inefficient for this task."
+    },
+    {
+        "topic": "Data Aggregation",
+        "question": "In a PivotTable, how can you change the values from a sum of sales to show the average sale amount instead?",
+        "rubric": "Excellent (5/5): Correctly explains that you need to right-click the values and go to 'Value Field Settings' to change the summarization from Sum to Average. Good (3/5): Knows that it can be changed but is unsure of the exact steps. Poor (1/5): Believes PivotTables can only show sums."
+    },
+    {
+        "topic": "Data Aggregation",
+        "question": "What is a Slicer in the context of a PivotTable, and what is it used for?",
+        "rubric": "Excellent (5/5): Accurately describes a Slicer as a user-friendly filter button that allows for quick and interactive filtering of the PivotTable data. Good (3/5): Understands it's a type of filter but is unclear on how it differs from the standard filter dropdowns. Poor (1/5): Has not heard of Slicers."
+    },
+    {
+        "topic": "Data Aggregation",
+        "question": "When might you use Power Query instead of traditional Excel tools like formulas or PivotTables?",
+        "rubric": "Excellent (5/5): Explains that Power Query is ideal for connecting to external data sources and for creating repeatable, automated steps for cleaning and transforming large datasets. Good (3/5): Mentions that it's for 'bigger data' or 'more complex cleaning' but is light on specifics. Poor (1/5): Unaware of Power Query."
+    },
+    {
+        "topic": "Data Cleaning",
+        "question": "You have a list of 10,000 customer entries, and you suspect there are many duplicate rows. What is the most efficient way to remove them?",
+        "rubric": "Excellent (5/5): Identifies the built-in 'Remove Duplicates' tool found in the Data tab and explains how to use it. Good (3/5): Suggests sorting the data to bring duplicates together for manual deletion, which is slow and error-prone. Poor (1/5): Unaware of any automated method."
+    },
+    {
+        "topic": "Data Cleaning",
+        "question": "A column contains data in the format 'LastName, FirstName' (e.g., 'Doe, John'). How can you split this into two separate columns for last and first names?",
+        "rubric": "Excellent (5/5): Recommends using the 'Text to Columns' feature with a comma as the delimiter. Good (3/5): Suggests complex text formulas like LEFT, RIGHT, and FIND, which also works but is more difficult. Poor (1/5): Suggests manual separation."
+    },
+    {
+        "topic": "Data Cleaning",
+        "question": "What does the 'Flash Fill' feature do, and can you give an example of when you would use it?",
+        "rubric": "Excellent (5/5): Correctly explains that Flash Fill automatically detects patterns in your data entry and completes the column for you. Provides a good example, like extracting an email username from a full email address. Good (3/5): Has a vague idea that it 'fills things in automatically' but cannot provide a clear example. Poor (1/5): Has never used Flash Fill."
+    },
+    {
+        "topic": "Data Cleaning",
+        "question": "Some numbers in your dataset have been imported as text, causing your sum formulas to fail. How can you identify and fix this issue?",
+        "rubric": "Excellent (5/5): Mentions multiple methods, such as using the green error-checking box to 'Convert to Number' or using the VALUE function. Good (3/5): Suggests re-typing the numbers manually, which isn't scalable. Poor (1/5): Doesn't know how to resolve number-as-text errors."
+    },
+    {
+        "topic": "Data Visualization",
+        "question": "How would you visually highlight all cells in a range that are below a certain value (e.g., all test scores below 50%) in red?",
+        "rubric": "Excellent (5/5): Identifies Conditional Formatting as the correct tool and describes the steps to create a 'Highlight Cells Rule' for values 'Less Than'. Good (3/5): Knows that cells can be colored based on value but is unsure of the specific feature name or steps. Poor (1/5): Suggests manual formatting."
+    },
+    {
+        "topic": "Scenarios",
+        "question": "You receive a messy data export every Monday. The same cleaning steps are required each week: remove duplicates, split a column, and format dates. How would you automate this process?",
+        "rubric": "Excellent (5/5): Suggests a robust automation method like recording a Macro or, even better, using Power Query to create a repeatable query. Good (3/5): Suggests creating a checklist of manual steps to follow each week. Poor (1/5): Assumes the work must be done manually every time."
+    },
+    {
+        "topic": "What-If Analysis",
+        "question": "You have a financial model that calculates profit based on 'Unit Price', 'Units Sold', and 'Cost per Unit'. What built-in Excel tool would you use to see how the profit changes as 'Units Sold' and 'Unit Price' vary simultaneously?",
+        "rubric": "Excellent (5/5): Correctly identifies the 'Data Table' (specifically a two-variable data table) as the perfect tool for this What-If Analysis scenario. Good (3/5): Suggests using Goal Seek or Scenario Manager, which are related but less suited for this specific problem. Poor (1/5): Suggests manually changing the inputs and recording the results."
+    },
+    {
+        "topic": "Core Functions",
+        "question": "Explain the purpose of the IFERROR function and provide a practical example of its use.",
+        "rubric": "Excellent (5/5): Clearly states that IFERROR traps and handles errors in a formula. Provides a classic example, such as wrapping a VLOOKUP in IFERROR to return 'Not Found' instead of an ugly #N/A error. Good (3/5): Understands that it relates to errors but is unclear on how to implement it. Poor (1/5): Unfamiliar with error handling functions."
+    }
+
+    
+]
+
+
