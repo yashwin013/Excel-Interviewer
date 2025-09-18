@@ -1,96 +1,308 @@
-[
-    {
-        "topic": "Core Functions",
-        "question": "You have two tables. The first contains 'ProductID' and 'ProductName'. The second contains 'ProductID' and 'SaleAmount'. How would you bring the 'ProductName' into the second table to match each sale?",
-        "rubric": "Excellent (5/5): Recommends VLOOKUP or INDEX/MATCH and correctly identifies the lookup value, table array, and column index. Good (3/5): Correctly identifies VLOOKUP as the function but is unclear on the arguments. Poor (1/5): Suggests a manual copy-paste method."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "What is a major limitation of the VLOOKUP function, and what function combination is often used to overcome it?",
-        "rubric": "Excellent (5/5): Identifies that VLOOKUP cannot look up values in columns to the left of the lookup column and names INDEX/MATCH as the more flexible alternative. Good (3/5): Mentions the left-lookup limitation but doesn't know the alternative. Poor (1/5): Is unaware of any limitations."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "You need to count the number of sales that were made in the 'North' region for amounts greater than $500. Which function would you use?",
-        "rubric": "Excellent (5/5): Correctly identifies COUNTIFS as the ideal function for handling multiple criteria. Good (3/5): Suggests filtering the data and then using COUNT or SUBTOTAL, which is less efficient. Poor (1/5): Suggests manually counting."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "How would you write a formula to display the word 'High' if a sale in cell A2 is greater than $1000, 'Medium' if it's between $500 and $1000, and 'Low' if it's less than $500?",
-        "rubric": "Excellent (5/5): Describes a nested IF statement or the more modern IFS function with the correct logical structure. Good (3/5): Correctly structures a simple IF statement for one condition (e.g., 'High' vs 'Low') but struggles with nesting. Poor (1/5): Does not know how to use logical functions."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "What is the difference between relative, absolute, and mixed cell references, and why is this important?",
-        "rubric": "Excellent (5/5): Clearly explains all three (e.g., A1, $A$1, $A1/A$1) and correctly states that absolute references are crucial for preventing errors when dragging formulas across multiple cells. Good (3/5): Understands the concept of locking cells with '$' but is unclear on the difference between absolute and mixed. Poor (1/5): Is unaware of cell references."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "You have a text string in cell A1: '   New Delhi - IN  '. How would you clean this to get just 'New Delhi - IN' without the extra spaces?",
-        "rubric": "Excellent (5/5): Recommends the TRIM function to remove leading/trailing spaces. Good (3/5): Suggests manual deletion. Poor (1/5): Unsure how to handle extra whitespace."
-    },
-    {
-        "topic": "Data Aggregation",
-        "question": "You are given a large table of sales data with columns for 'Region', 'Product_Category', and 'Sale_Amount'. Describe the steps to create a summary report showing total sales for each category, broken down by region.",
-        "rubric": "Excellent (5/5): Immediately identifies a PivotTable as the best tool and describes the steps: insert PivotTable, drag 'Region' to Columns, 'Product_Category' to Rows, and 'Sale_Amount' to Values. Good (3/5): Describes a more manual process like sorting and using the Subtotal feature. Poor (1/5): Suggests using formulas like SUMIFS, which is highly inefficient for this task."
-    },
-    {
-        "topic": "Data Aggregation",
-        "question": "In a PivotTable, how can you change the values from a sum of sales to show the average sale amount instead?",
-        "rubric": "Excellent (5/5): Correctly explains that you need to right-click the values and go to 'Value Field Settings' to change the summarization from Sum to Average. Good (3/5): Knows that it can be changed but is unsure of the exact steps. Poor (1/5): Believes PivotTables can only show sums."
-    },
-    {
-        "topic": "Data Aggregation",
-        "question": "What is a Slicer in the context of a PivotTable, and what is it used for?",
-        "rubric": "Excellent (5/5): Accurately describes a Slicer as a user-friendly filter button that allows for quick and interactive filtering of the PivotTable data. Good (3/5): Understands it's a type of filter but is unclear on how it differs from the standard filter dropdowns. Poor (1/5): Has not heard of Slicers."
-    },
-    {
-        "topic": "Data Aggregation",
-        "question": "When might you use Power Query instead of traditional Excel tools like formulas or PivotTables?",
-        "rubric": "Excellent (5/5): Explains that Power Query is ideal for connecting to external data sources and for creating repeatable, automated steps for cleaning and transforming large datasets. Good (3/5): Mentions that it's for 'bigger data' or 'more complex cleaning' but is light on specifics. Poor (1/5): Unaware of Power Query."
-    },
-    {
+{
+    "easy": [
+        {
+        "topic": "Basic Navigation",
+        "question": "How do you select an entire column or an entire row using your mouse?",
+        "rubric": "Excellent (5/5): Correctly states that you click on the column letter (A, B, C...) or the row number (1, 2, 3...). Good (3/5): Describes selecting cells and dragging, which is inefficient. Poor (1/5): Unsure how to select entire rows/columns."
+        },
+        {
+        "topic": "Basic Formulas",
+        "question": "What is the formula to add the numbers in cells A1 and A2?",
+        "rubric": "Excellent (5/5): Provides the correct formula: =A1+A2. Good (3/5): Describes the concept of adding cells but makes a syntax error. Poor (1/5): Does not know how to write a basic formula."
+        },
+        {
+        "topic": "Basic Functions",
+        "question": "What is the function to find the average of numbers in a range, for example, from cell B2 to B10?",
+        "rubric": "Excellent (5/5): Correctly provides the function =AVERAGE(B2:B10). Good (3/5): Knows the function name is AVERAGE but is unsure of the syntax for a range. Poor (1/5): Suggests a manual calculation."
+        },
+        {
+        "topic": "Basic Formatting",
+        "question": "How do you make text bold in a cell using a keyboard shortcut?",
+        "rubric": "Excellent (5/5): Correctly identifies the shortcut Ctrl+B. Good (3/5): Mentions using the 'B' button on the Home tab but doesn't know the shortcut. Poor (1/5): Unfamiliar with text formatting."
+        },
+        {
+        "topic": "Data Entry",
+        "question": "What does the 'Fill Handle' do in Excel?",
+        "rubric": "Excellent (5/5): Explains it's the small square at the bottom-right of a selected cell used to copy formulas or extend a series (like dates or numbers) down a column or across a row. Good (3/5): Knows it's for copying but doesn't mention extending a series. Poor (1/5): Doesn't know what the Fill Handle is."
+        },
+        {
+        "topic": "Basic Charting",
+        "question": "What are the first steps to create a simple bar chart from a table of data?",
+        "rubric": "Excellent (5/5): Explains that you first select the data range, then go to the Insert tab and choose a chart type from the Charts group. Good (3/5): Mentions the Insert tab but is unclear about selecting the data first. Poor (1/5): Has not created charts before."
+        },
+        {
+        "topic": "Basic Navigation",
+        "question": "How do you freeze panes in Excel, and why would you want to do this?",
+        "rubric": "Excellent (5/5): Correctly identifies 'Freeze Panes' in the View tab and explains its purpose is to keep header rows or columns visible while scrolling through a large dataset. Good (3/5): Knows the purpose but is unsure where to find the feature. Poor (1/5): Unfamiliar with the concept."
+        },
+        {
+        "topic": "Basic Functions",
+        "question": "What is the AutoSum feature in Excel and how do you use it?",
+        "rubric": "Excellent (5/5): Correctly explains that AutoSum automatically suggests a formula (like SUM) for a selected range and mentions the keyboard shortcut (Alt + =). Good (3/5): Explains that it sums numbers but is unclear on the shortcut. Poor (1/5): Unsure what AutoSum is."
+        },
+        {
+        "topic": "Worksheet Management",
+        "question": "How do you rename a worksheet (a tab at the bottom of the screen)?",
+        "rubric": "Excellent (5/5): States that you can double-click the tab name or right-click and select 'Rename'. Good (3/5): Only knows one of the methods. Poor (1/5): Does not know how to rename a worksheet."
+        },
+        {
+        "topic": "Basic Formatting",
+        "question": "How do you apply a currency format to a column of numbers?",
+        "rubric": "Excellent (5/5): Mentions the currency format button in the Home tab's Number group or the shortcut Ctrl+Shift+$. Good (3/5): Mentions right-clicking and using 'Format Cells'. Poor (1/5): Suggests manually typing the currency symbol."
+        },
+        {
+        "topic": "Basic Data Tools",
+        "question": "What does the 'Sort' feature do?",
+        "rubric": "Excellent (5/5): Explains it arranges data in ascending (A-Z, 1-10) or descending (Z-A, 10-1) order based on the values in one or more columns. Good (3/5): Knows it's for ordering data but can't explain ascending/descending. Poor (1/5): Unfamiliar with sorting."
+        },
+        {
+        "topic": "Basic Formulas",
+        "question": "What is the difference between a formula and a value in a cell?",
+        "rubric": "Excellent (5/5): Correctly explains that a value is static data (text or a number), while a formula is a calculation that starts with an equals sign (=) and produces a result that can change if other cells change. Good (3/5): Vaguely explains the difference but isn't clear. Poor (1/5): Thinks they are the same."
+        },
+        {
+        "topic": "Basic Functions",
+        "question": "What do the MIN and MAX functions do?",
+        "rubric": "Excellent (5/5): Explains that MIN finds the smallest number in a range and MAX finds the largest number in a range. Good (3/5): Correctly identifies one but not the other. Poor (1/5): Unsure of their purpose."
+        },
+        {
+        "topic": "Cell Management",
+        "question": "How can you wrap text within a cell so that long sentences are visible without making the column wider?",
+        "rubric": "Excellent (5/5): Correctly identifies the 'Wrap Text' button on the Home tab. Good (3/5): Knows it's possible but suggests manually inserting line breaks (Alt+Enter). Poor (1/5): Unaware of this feature."
+        },
+        {
+        "topic": "Basic Data Tools",
+        "question": "What is the 'Filter' feature used for?",
+        "rubric": "Excellent (5/5): Explains that filtering allows you to temporarily hide rows that don't meet a specific criteria, making it easier to focus on a subset of your data. Good (3/5): Describes it as a 'search' but doesn't mention hiding rows. Poor (1/5): Confuses it with sorting."
+        },
+        {
+        "topic": "Basic Charting",
+        "question": "How do you add a title to your chart?",
+        "rubric": "Excellent (5/5): Explains you can click the '+' sign next to the chart and check 'Chart Title', or use the 'Add Chart Element' button in the Design tab. Good (3/5): Suggests just double-clicking where the title should be. Poor (1/5): Doesn't know how."
+        },
+        {
+        "topic": "Worksheet Management",
+        "question": "How do you insert a new column into a worksheet?",
+        "rubric": "Excellent (5/5): Explains that you can right-click a column header and select 'Insert'. Good (3/5): Suggests a more complex method like copying and pasting data to make space. Poor (1/5): Unsure how to add columns."
+        },
+        {
+        "topic": "Data Entry",
+        "question": "What is the purpose of the 'Merge & Center' button?",
+        "rubric": "Excellent (5/5): Explains that it combines multiple selected cells into one larger cell and centers the content, often used for creating titles or headers. Good (3/5): Knows it combines cells but doesn't mention centering. Poor (1/5): Unfamiliar with the feature."
+        },
+        {
+        "topic": "Basic Formulas",
+        "question": "If you see '#####' in a cell, what does it usually mean?",
+        "rubric": "Excellent (5/5): Correctly states that the column is too narrow to display the entire number. Good (3/5): Thinks it's an error in the formula. Poor (1/5): Has not seen this before."
+        },
+        {
+        "topic": "Basic Navigation",
+        "question": "What is the 'Name Box' in Excel?",
+        "rubric": "Excellent (5/5): Correctly identifies the box to the left of the formula bar that displays the address of the currently selected cell (e.g., A1). Good (3/5): Points to the general area but is unsure of its name or purpose. Poor (1/5): Does not know what it is."
+        }
+    ],
+    "medium": [
+        {
+        "topic": "Lookup Functions",
+        "question": "What is VLOOKUP used for, and what are its four main arguments?",
+        "rubric": "Excellent (5/5): Explains VLOOKUP is for finding a value in the first column of a table and returning a corresponding value from another column. Names the four arguments: lookup_value, table_array, col_index_num, and range_lookup. Good (3/5): Explains the purpose correctly but can't name all four arguments. Poor (1/5): Unsure of VLOOKUP's purpose."
+        },
+        {
+        "topic": "Logical Functions",
+        "question": "Explain what the IF function does. For example, how would you use it to show 'Pass' if a score in A2 is >= 50, and 'Fail' otherwise?",
+        "rubric": "Excellent (5/5): Correctly explains the IF function checks a logical condition and returns one value if true and another if false. Provides the correct formula: =IF(A2>=50, \"Pass\", \"Fail\"). Good (3/5): Understands the concept but makes a syntax error in the formula. Poor (1/5): Doesn't know how to use IF."
+        },
+        {
+        "topic": "Conditional Functions",
+        "question": "What is the difference between COUNT, COUNTA, and COUNTIF?",
+        "rubric": "Excellent (5/5): Correctly explains that COUNT counts cells with numbers, COUNTA counts non-empty cells (numbers and text), and COUNTIF counts cells that meet a specific criteria. Good (3/5): Correctly defines two of the three. Poor (1/5): Thinks they are all the same."
+        },
+        {
+        "topic": "Data Validation",
+        "question": "What is Data Validation, and can you give an example of how it might be used?",
+        "rubric": "Excellent (5/5): Explains it's a feature to restrict what users can enter into a cell. Provides a good example, like creating a dropdown list of choices or allowing only whole numbers in a specific range. Good (3/5): Knows it's for controlling input but can't give a clear example. Poor (1/5): Unaware of the feature."
+        },
+        {
+        "topic": "Conditional Formatting",
+        "question": "How would you use Conditional Formatting to automatically highlight all sales figures in a column that are above $10,000?",
+        "rubric": "Excellent (5/5): Correctly describes the steps: select the data, go to Conditional Formatting -> Highlight Cells Rules -> Greater Than, and enter 10000. Good (3/5): Knows it's done with Conditional Formatting but is unsure of the specific rule. Poor (1/5): Suggests manual formatting."
+        },
+        {
+        "topic": "PivotTables",
+        "question": "What is a PivotTable and what is its primary purpose?",
+        "rubric": "Excellent (5/5): Defines a PivotTable as a powerful tool for summarizing, analyzing, and exploring large amounts of data interactively without using formulas. Good (3/5): Describes it as a 'report' but isn't clear on its interactive or summary capabilities. Poor (1/5): Has not used PivotTables."
+        },
+        {
+        "topic": "Data Structuring",
+        "question": "What is a 'Named Range' in Excel and why is it a good practice to use them in formulas?",
+        "rubric": "Excellent (5/5): Defines a named range as giving a descriptive name to a cell or range. Explains it makes formulas easier to read and debug (e.g., '=SUM(Sales)' vs. '=SUM(C2:C1000)'). Good (3/5): Can define a named range but is unclear on its benefits. Poor (1/5): Has not heard of named ranges."
+        },
+        {
+        "topic": "Text Functions",
+        "question": "You have a cell with 'John Smith'. How would you extract just the first name, 'John'?",
+        "rubric": "Excellent (5/5): Recommends using the LEFT function in combination with the FIND or SEARCH function to locate the space. Good (3/5): Suggests the LEFT function but hardcodes the number of characters (e.g., =LEFT(A1,4)), which isn't dynamic. Poor (1/5): Suggests manual extraction."
+        },
+        {
+        "topic": "Advanced Functions",
+        "question": "What is the main difference between the SUM and SUBTOTAL functions?",
+        "rubric": "Excellent (5/5): Correctly explains that SUBTOTAL can ignore values in hidden rows (from filtering), while SUM always includes them. Mentions the function number argument in SUBTOTAL. Good (3/5): Understands there's a difference related to filtering but can't explain it. Poor (1/5): Believes they are the same."
+        },
+        {
+        "topic": "Cell References",
+        "question": "What is the difference between a relative reference (A1) and an absolute reference ($A$1)?",
+        "rubric": "Excellent (5/5): Explains that relative references change when a formula is copied to another cell, while absolute references remain constant, which is essential for lookups or constants. Good (3/5): Knows the '$' sign 'locks' a cell but isn't clear on the terminology or when to use it. Poor (1/5): Unaware of the difference."
+        },
+        {
         "topic": "Data Cleaning",
-        "question": "You have a list of 10,000 customer entries, and you suspect there are many duplicate rows. What is the most efficient way to remove them?",
-        "rubric": "Excellent (5/5): Identifies the built-in 'Remove Duplicates' tool found in the Data tab and explains how to use it. Good (3/5): Suggests sorting the data to bring duplicates together for manual deletion, which is slow and error-prone. Poor (1/5): Unaware of any automated method."
-    },
-    {
+        "question": "How do you find and remove duplicate rows from a dataset?",
+        "rubric": "Excellent (5/5): Correctly identifies the 'Remove Duplicates' tool on the Data tab. Good (3/5): Suggests a manual method like sorting and then deleting rows, which is slow and error-prone. Poor (1/5): Doesn't know how to handle duplicates."
+        },
+        {
+        "topic": "Lookup Functions",
+        "question": "What does the `range_lookup` argument in VLOOKUP do when set to TRUE vs. FALSE?",
+        "rubric": "Excellent (5/5): Correctly explains that FALSE finds an exact match, while TRUE finds an approximate match (requiring the first column to be sorted). States that FALSE is used in most business cases. Good (3/5): Knows FALSE is for an exact match but doesn't understand the approximate match. Poor (1/5): Unsure of the argument's purpose."
+        },
+        {
+        "topic": "Conditional Functions",
+        "question": "How would you use SUMIFS to find the total sales from column C for the 'North' region in column A and the 'Electronics' category in column B?",
+        "rubric": "Excellent (5/5): Correctly describes the SUMIFS function and its syntax, properly identifying the sum_range, criteria_range1, criteria1, criteria_range2, and criteria2. Good (3/5): Knows to use SUMIFS but confuses the order of the arguments. Poor (1/5): Tries to use a simple SUM or SUMIF."
+        },
+        {
+        "topic": "Charting",
+        "question": "What is a combination chart, and when would you use one?",
+        "rubric": "Excellent (5/5): Explains a combination chart displays two or more data series using different chart types (e.g., column and line) on the same chart. Gives a good example, like showing monthly sales (columns) against a sales target (line). Good (3/5): Describes it as having 'two charts in one' but can't give a practical example. Poor (1/5): Has not used them."
+        },
+        {
+        "topic": "Text Functions",
+        "question": "How can you join the text from two cells, for example, cell A2 ('John') and B2 ('Smith'), into a third cell?",
+        "rubric": "Excellent (5/5): Mentions both methods: using the CONCATENATE function or using the ampersand (&) operator (e.g., =A2&\" \"&B2). Good (3/5): Knows one of the two methods. Poor (1/5): Suggests manual copy-pasting."
+        },
+        {
         "topic": "Data Cleaning",
-        "question": "A column contains data in the format 'LastName, FirstName' (e.g., 'Doe, John'). How can you split this into two separate columns for last and first names?",
-        "rubric": "Excellent (5/5): Recommends using the 'Text to Columns' feature with a comma as the delimiter. Good (3/5): Suggests complex text formulas like LEFT, RIGHT, and FIND, which also works but is more difficult. Poor (1/5): Suggests manual separation."
-    },
-    {
-        "topic": "Data Cleaning",
-        "question": "What does the 'Flash Fill' feature do, and can you give an example of when you would use it?",
-        "rubric": "Excellent (5/5): Correctly explains that Flash Fill automatically detects patterns in your data entry and completes the column for you. Provides a good example, like extracting an email username from a full email address. Good (3/5): Has a vague idea that it 'fills things in automatically' but cannot provide a clear example. Poor (1/5): Has never used Flash Fill."
-    },
-    {
-        "topic": "Data Cleaning",
-        "question": "Some numbers in your dataset have been imported as text, causing your sum formulas to fail. How can you identify and fix this issue?",
-        "rubric": "Excellent (5/5): Mentions multiple methods, such as using the green error-checking box to 'Convert to Number' or using the VALUE function. Good (3/5): Suggests re-typing the numbers manually, which isn't scalable. Poor (1/5): Doesn't know how to resolve number-as-text errors."
-    },
-    {
-        "topic": "Data Visualization",
-        "question": "How would you visually highlight all cells in a range that are below a certain value (e.g., all test scores below 50%) in red?",
-        "rubric": "Excellent (5/5): Identifies Conditional Formatting as the correct tool and describes the steps to create a 'Highlight Cells Rule' for values 'Less Than'. Good (3/5): Knows that cells can be colored based on value but is unsure of the specific feature name or steps. Poor (1/5): Suggests manual formatting."
-    },
-    {
-        "topic": "Scenarios",
-        "question": "You receive a messy data export every Monday. The same cleaning steps are required each week: remove duplicates, split a column, and format dates. How would you automate this process?",
-        "rubric": "Excellent (5/5): Suggests a robust automation method like recording a Macro or, even better, using Power Query to create a repeatable query. Good (3/5): Suggests creating a checklist of manual steps to follow each week. Poor (1/5): Assumes the work must be done manually every time."
-    },
-    {
+        "question": "How would you use 'Text to Columns' to split a column of full names into first and last names?",
+        "rubric": "Excellent (5/5): Explains the process of using the Text to Columns feature on the Data tab, selecting 'Delimited', and using 'Space' as the delimiter. Good (3/5): Knows the feature exists but is unclear on the steps. Poor (1/5): Unaware of this tool."
+        },
+        {
+        "topic": "Logical Functions",
+        "question": "What is the purpose of the IFERROR function?",
+        "rubric": "Excellent (5/5): Explains that IFERROR traps errors in a formula and returns a custom value instead. Gives a classic example, like wrapping a VLOOKUP to return 'Not Found' instead of '#N/A'. Good (3/5): Knows it's for handling errors but can't give a clear example. Poor (1/5): Has not used IFERROR."
+        },
+        {
+        "topic": "PivotTables",
+        "question": "How do you refresh a PivotTable after the source data has been updated?",
+        "rubric": "Excellent (5/5): Mentions right-clicking the PivotTable and selecting 'Refresh' or using the 'Refresh' button on the Analyze/Data tab. Good (3/5): Believes it updates automatically, which is incorrect. Poor (1/5): Doesn't know they need to be refreshed."
+        },
+        {
+        "topic": "Data Validation",
+        "question": "How can you create a dynamic dropdown list that automatically updates when you add new items to the source list?",
+        "rubric": "Excellent (5/5): Describes an advanced method, such as formatting the source list as an Excel Table and referencing it, or using a dynamic named range with OFFSET/COUNTA. Good (3/5): Knows how to make a static dropdown list from a range but not a dynamic one. Poor (1/5): Doesn't know how to create dropdowns."
+        },
+        {
+        "topic": "Conditional Formatting",
+        "question": "How can you use Conditional Formatting with a formula? For example, to highlight an entire row if a value in column C is 'Complete'.",
+        "rubric": "Excellent (5/5): Explains how to create a 'New Rule' using a 'formula to determine which cells to format'. Correctly provides the formula (e.g., =$C1=\"Complete\") and mentions the importance of the absolute column reference ($C). Good (3/5): Knows a formula can be used but doesn't understand the concept of mixed references to apply it to a whole row. Poor (1/5): Didn't know formulas could be used."
+        }
+    ],
+    "hard": [
+        {
+        "topic": "Lookup Functions",
+        "question": "Explain why INDEX/MATCH is often considered superior to VLOOKUP.",
+        "rubric": "Excellent (5/5): Lists multiple reasons: it can look up to the left, it's not broken by inserting/deleting columns, it's slightly faster on large datasets, and it can perform horizontal lookups. Good (3/5): Mentions one or two key reasons, typically the left-lookup capability. Poor (1/5): Believes VLOOKUP is always better or sees no difference."
+        },
+        {
         "topic": "What-If Analysis",
-        "question": "You have a financial model that calculates profit based on 'Unit Price', 'Units Sold', and 'Cost per Unit'. What built-in Excel tool would you use to see how the profit changes as 'Units Sold' and 'Unit Price' vary simultaneously?",
-        "rubric": "Excellent (5/5): Correctly identifies the 'Data Table' (specifically a two-variable data table) as the perfect tool for this What-If Analysis scenario. Good (3/5): Suggests using Goal Seek or Scenario Manager, which are related but less suited for this specific problem. Poor (1/5): Suggests manually changing the inputs and recording the results."
-    },
-    {
-        "topic": "Core Functions",
-        "question": "Explain the purpose of the IFERROR function and provide a practical example of its use.",
-        "rubric": "Excellent (5/5): Clearly states that IFERROR traps and handles errors in a formula. Provides a classic example, such as wrapping a VLOOKUP in IFERROR to return 'Not Found' instead of an ugly #N/A error. Good (3/5): Understands that it relates to errors but is unclear on how to implement it. Poor (1/5): Unfamiliar with error handling functions."
-    }
-
-    
-]
-
-
+        "question": "What is the difference between Goal Seek and Scenario Manager?",
+        "rubric": "Excellent (5/5): Correctly explains that Goal Seek finds a single input value required to achieve a specific result in a formula. Scenario Manager allows you to create and compare multiple sets of different input variables to see their effect on a result. Good (3/5): Can explain one tool but is unclear on the other. Poor (1/5): Unfamiliar with What-If Analysis tools."
+        },
+        {
+        "topic": "Advanced Formulas",
+        "question": "What is a CSE or Array Formula in older versions of Excel, and what problem does it solve?",
+        "rubric": "Excellent (5/5): Explains an array formula (entered with Ctrl+Shift+Enter) performs multiple calculations. Gives an example, like summing values based on multiple criteria without SUMIFS. Good (3/5): Has heard of them but can't explain what they do. Poor (1/5): Does not know what an array formula is."
+        },
+        {
+        "topic": "Data Transformation",
+        "question": "Describe a situation where you would use Power Query to 'Unpivot' data, and explain what that process achieves.",
+        "rubric": "Excellent (5/5): Provides a clear example, such as transforming a table with months as columns into a normalized table with a single 'Month' column and a 'Value' column. Explains it makes the data suitable for PivotTables. Good (3/5): Understands it's for restructuring data but the example is unclear. Poor (1/5): Unfamiliar with Power Query."
+        },
+        {
+        "topic": "PivotTables",
+        "question": "What is a 'Calculated Field' in a PivotTable and how do you create one?",
+        "rubric": "Excellent (5/5): Defines a calculated field as a custom formula that performs calculations on other fields within the PivotTable. Explains how to create one via PivotTable Analyze -> Fields, Items, & Sets -> Calculated Field. Good (3/5): Knows custom fields can be created but is unsure of the name or method. Poor (1/5): Didn't know this was possible."
+        },
+        {
+        "topic": "Advanced Formulas",
+        "question": "Explain the purpose of the INDIRECT function and provide a practical business example.",
+        "rubric": "Excellent (5/5): Correctly states that INDIRECT returns a reference specified by a text string. Provides a good example, like creating dynamic summaries where a dropdown cell (e.g., 'Sheet2') determines which worksheet a formula pulls data from. Good (3/5): Understands it refers to text but can't give a practical example. Poor (1/5): Has never used INDIRECT."
+        },
+        {
+        "topic": "Data Model",
+        "question": "What is the Data Model in Excel (Power Pivot) and how does it differ from just using multiple worksheets?",
+        "rubric": "Excellent (5/5): Explains the Data Model is an internal database that can handle millions of rows and allows you to create relationships between different tables (like in a relational database). This avoids massive VLOOKUPs and enables more powerful analysis. Good (3/5): Knows it's for 'big data' but can't explain the concept of relationships. Poor (1/5): Thinks it's just a collection of worksheets."
+        },
+        {
+        "topic": "Data Transformation",
+        "question": "In Power Query, what is the difference between 'Merge Queries' and 'Append Queries'?",
+        "rubric": "Excellent (5/5): Correctly explains that 'Merge' is like a SQL join, adding columns from one table to another based on a common key. 'Append' is like a SQL union, stacking rows from one table on top of another. Good (3/5): Can explain one but confuses it with the other. Poor (1/5): Unfamiliar with these Power Query operations."
+        },
+        {
+        "topic": "What-If Analysis",
+        "question": "How would you use a 'Data Table' to perform a sensitivity analysis?",
+        "rubric": "Excellent (5/5): Explains that a Data Table can show how a final result changes when one or two input variables in a formula are altered. Gives a good example, like seeing how loan payments change based on different interest rates and loan terms. Good (3/5): Confuses it with a regular Excel Table or Scenario Manager. Poor (1/5): Unaware of Data Tables."
+        },
+        {
+        "topic": "Automation",
+        "question": "When would you choose to record a Macro versus writing VBA code from scratch?",
+        "rubric": "Excellent (5/5): Explains that recording a Macro is excellent for simple, linear, repetitive tasks. Writing VBA from scratch is necessary for adding logic, loops, error handling, user interaction, and more complex automation. Good (3/5): Only understands recording Macros and isn't sure why you would write code. Poor (1/5): Unfamiliar with Macros/VBA."
+        },
+        {
+        "topic": "Advanced Functions",
+        "question": "Explain what the OFFSET function does and a common risk associated with it.",
+        "ric": "Excellent (5/5): Defines OFFSET as a function that returns a reference to a range that is a specified number of rows and columns from a starting cell or range. Mentions its main risk is that it is a 'volatile' function, meaning it recalculates whenever any cell in the workbook changes, which can slow down large spreadsheets. Good (3/5): Can explain what it does but is unaware of its performance implications. Poor (1/5): Has not used OFFSET."
+        },
+        {
+        "topic": "Data Model",
+        "question": "What is DAX and how is it used in Excel?",
+        "rubric": "Excellent (5/5): Correctly identifies DAX (Data Analysis Expressions) as the formula language used in Power Pivot. Explains it's used to create measures (calculated fields) and calculated columns within the Data Model, enabling sophisticated analysis that's not possible in a standard PivotTable. Good (3/5): Knows it's a formula language for Power Pivot but can't give specifics. Poor (1/5): Has not heard of DAX."
+        },
+        {
+        "topic": "Power Pivot",
+        "question": "What is the difference between a calculated column and a measure (calculated field) in Power Pivot?",
+        "rubric": "Excellent (5/5): Explains that a calculated column is computed row-by-row and stored in the table, while a measure is calculated on the fly based on the context of a PivotTable (filters, rows, columns). Good (3/5): Understands they are different but is fuzzy on the context/storage difference. Poor (1/5): Believes they are the same."
+        },
+        {
+        "topic": "Advanced Charting",
+        "question": "How can you create a chart template in Excel?",
+        "rubric": "Excellent (5/5): Explains the process: create and format a chart exactly as desired, then right-click the chart and select 'Save as Template'. This allows for consistent chart styling across multiple reports. Good (3/5): Knows it's possible but is unsure of the steps. Poor (1/5): Didn't know chart templates were a feature."
+        },
+        {
+        "topic": "Data Protection",
+        "question": "What is the difference between protecting a worksheet and protecting a workbook?",
+        "rubric": "Excellent (5/5): Correctly explains that protecting a worksheet prevents changes to cells within that sheet (like editing or formatting). Protecting a workbook prevents changes to the workbook's structure, such as adding, deleting, or renaming worksheets. Good (3/5): Confuses the two or thinks they are the same. Poor (1/5): Unfamiliar with protection features."
+        },
+        {
+        "topic": "Error Handling",
+        "question": "Besides IFERROR, what other functions can be used for more specific error handling?",
+        "rubric": "Excellent (5/5): Names other specific error-handling functions like ISERROR, ISNA, or the more modern IFNA, and explains when they might be preferable (e.g., using IFNA to only handle #N/A lookup errors). Good (3/5): Is only aware of IFERROR. Poor (1/5): Doesn't use error-handling functions."
+        },
+        {
+        "topic": "Lookup Functions",
+        "question": "Explain what XLOOKUP is and list two advantages it has over VLOOKUP.",
+        "rubric": "Excellent (5/5): Defines XLOOKUP as the modern successor to VLOOKUP/HLOOKUP/INDEX-MATCH. Lists at least two key advantages, such as: it defaults to an exact match, it can look to the left, it can return entire rows/columns, and it has built-in IFNA-like error handling. Good (3/5): Can name XLOOKUP but can only list one advantage. Poor (1/5): Has not heard of XLOOKUP."
+        },
+        {
+        "topic": "Dynamic Arrays",
+        "question": "What are Dynamic Array functions, and how do they differ from traditional formulas? Name one example.",
+        "rubric": "Excellent (5/5): Explains that Dynamic Array formulas automatically 'spill' their results into adjacent blank cells without needing to be copied down. Names a key dynamic array function like FILTER, SORT, UNIQUE, or XLOOKUP. Good (3/5): Understands the 'spilling' concept but cannot name a specific function. Poor (1/5): Unaware of Dynamic Arrays."
+        },
+        {
+        "topic": "Power Query",
+        "question": "What does it mean to 'disable background refresh' for a query and why might you do this?",
+        "rubric": "Excellent (5/5): Explains that by default, Excel allows you to continue working while a query refreshes in the background. Disabling this forces Excel to wait for the query to finish before you can continue working, which is crucial when subsequent calculations or other queries depend on the refreshed data being complete. Good (3/5): Knows where the setting is but is unsure of its purpose. Poor (1/5): Unfamiliar with query refresh settings."
+        },
+        {
+        "topic": "Scenarios",
+        "question": "You need to consolidate data from 12 separate, identically structured monthly sales files into one master table. What is the most efficient and repeatable way to do this in Excel?",
+        "rubric": "Excellent (5/5): Identifies Power Query (Get & Transform) as the best tool. Describes the 'Get Data from Folder' method, which can automatically combine all files in a specified folder into a single table and is easily refreshable. Good (3/5): Suggests a VBA Macro, which is powerful but more complex to write and maintain than Power Query for this task. Poor (1/5): Suggests a manual, time-consuming process of copying and pasting data from each of the 12 files."
+        }
+    ]
+}

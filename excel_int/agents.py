@@ -1,3 +1,5 @@
+# agents.py
+
 import os
 import json
 from openai import OpenAI
@@ -33,14 +35,13 @@ def answer_evaluator_agent(question, rubric, user_answer):
     Analyze the candidate's answer against the rubric. Provide a score from 1 (Poor) to 5 (Excellent) and a brief justification for your score.
     Respond ONLY with a single, valid JSON object in the following format. Do not include any other text, just the JSON.
     {{
-      "score": <integer>,
-      "justification": "<string>"
+        "score": <integer>,
+        "justification": "<string>"
     }}
     """
     try:
         response = client.chat.completions.create(
-            # --- CORRECTED MODEL NAME ---
-            model="sonar-pro",
+            model="llama-3-sonar-small-32k-online",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2
         )
@@ -51,6 +52,52 @@ def answer_evaluator_agent(question, rubric, user_answer):
         return {"score": 0, "justification": "Error during evaluation."}
 
 
+# --- THIS AGENT HAS BEEN UPDATED WITH A SMARTER PROMPT ---
+def conversational_feedback_agent(question, user_answer, rubric, score):
+    """
+    Analyzes the user's answer against the rubric and provides a smart,
+    context-aware response like a real interviewer.
+    """
+    prompt = f"""
+    You are a highly intelligent and empathetic AI Excel interviewer. Your goal is to provide 'smart replies' that feel like a real, insightful conversation, not a robotic script.
+
+    A candidate has just answered a question. Your internal system has provided you with the scoring rubric and the candidate's score.
+
+    **Question Asked:**
+    "{question}"
+
+    **Candidate's Specific Answer:**
+    "{user_answer}"
+
+    **Evaluation Rubric (for your reference on what a perfect answer is):**
+    "{rubric}"
+
+    **Internal Score:**
+    {score}/5
+
+    **Your Task:**
+    Do NOT just state the score or the justification from the rubric. Instead, **ANALYZE** the candidate's answer in detail and provide a response that directly engages with what they said.
+
+    1.  **Acknowledge their specific points:** Start by referencing something they actually said. (e.g., "You're right on track with using VLOOKUP for this...")
+    2.  **Compare their answer to the rubric:** If they missed a key detail, guide them towards it with a question. (e.g., "...but what about the fourth argument in VLOOKUP? Why is that one important for getting an exact match?")
+    3.  **If they are correct (score 5):** Confirm it enthusiastically and add a small, related piece of information. (e.g., "Exactly! Using INDEX/MATCH is a great habit. Many professionals prefer it because it's more robust.")
+    4.  **If they are partially correct (score 3-4):** Acknowledge the correct parts and gently correct the incorrect parts or inefficiencies. (e.g., "Using a PivotTable would definitely work here, that's a good solution. For this specific case, a function called SUMIFS would be even more direct. Have you used that one before?")
+    5.  **If they are incorrect (score 1-2):** Be encouraging and reframe the problem to guide them without giving the answer away. (e.g., "Okay, I see your thought process. For this task, we need a function that can look up a value. Does a function for that come to mind?")
+
+    **Your tone should be professional, encouraging, and insightful. Your goal is to help the candidate think, not just to grade them.**
+    """
+    try:
+        response = client.chat.completions.create(
+            model="sonar-pro",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.6
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"Error calling Perplexity API for conversational feedback: {e}")
+        return "An error occurred while generating feedback."
+
+
 def report_generator_agent(interview_history):
     """
     Generates a final performance report based on the entire interview history.
@@ -58,13 +105,9 @@ def report_generator_agent(interview_history):
     formatted_history = "\n\n".join(
         [f"Role: {msg['role']}\nContent: {msg['content']}" for msg in interview_history]
     )
-
     prompt = f"""
     You are a senior hiring manager providing feedback on an Excel technical interview.
     Based on the following complete interview transcript, your task is to generate a final performance report for the candidate.
-
-    **Interview Transcript:**
-    {formatted_history}
 
     **Your Task:**
     Write a constructive, professional performance summary. The summary should include:
@@ -77,7 +120,6 @@ def report_generator_agent(interview_history):
     """
     try:
         response = client.chat.completions.create(
-            # --- CORRECTED MODEL NAME ---
             model="sonar-pro",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.5
@@ -86,47 +128,3 @@ def report_generator_agent(interview_history):
     except Exception as e:
         print(f"Error calling Perplexity API for report generation: {e}")
         return "There was an error generating your final report."
-    
-
-
-
-
-# agents.py (add this new function at the end)
-
-def conversational_feedback_agent(question, user_answer, evaluation):
-    """
-    Takes a structured evaluation and delivers it in a natural, conversational way.
-    """
-    score = evaluation.get("score")
-    justification = evaluation.get("justification")
-
-    prompt = f"""
-    You are a friendly and encouraging Excel technical interviewer. Your internal system has just evaluated a candidate's answer.
-
-    **Question Asked:** "{question}"
-    **Candidate's Answer:** "{user_answer}"
-    
-    **Internal Evaluation Results:**
-    - Score: {score}/5
-    - Justification: {justification}
-
-    **Your Task:**
-    Deliver this evaluation to the candidate in a natural, conversational, and encouraging tone. Do NOT sound like a robot just listing the score.
-
-    - If the score is high (4 or 5), start with a positive affirmation like "Excellent, that's exactly right!" or "Great explanation!". Then, briefly mention the key points they hit correctly based on the justification.
-    - If the score is average (3), acknowledge their answer positively but gently guide them. For example: "That's a solid approach. A slightly more efficient way might be...".
-    - If the score is low (1 or 2), be encouraging, not critical. Start with something like "Okay, thanks for walking me through your thought process." or "That's a good start." Then, clearly and simply explain the correct approach based on the justification.
-    
-    Keep your response concise and focused on the feedback.
-    """
-    try:
-        response = client.chat.completions.create(
-            model="sonar-pro", # Or your preferred model
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.6 # Allow for a more natural, conversational tone
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        print(f"Error calling Perplexity API for conversational feedback: {e}")
-        # Fallback to the structured feedback if the conversational agent fails
-        return f"**Evaluation:**\n- **Score:** {score}/5\n- **Feedback:** {justification}"
