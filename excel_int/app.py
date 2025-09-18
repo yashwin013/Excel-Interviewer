@@ -22,7 +22,7 @@ st.markdown("Welcome! This AI will assess your Excel skills. Let's get started."
 
 # --- MAIN APP LOGIC ---
 
-def load_questions(file_path="questions.json"):
+def load_questions(file_path="excel_int/questions.json"):
     with open(file_path, 'r') as f:
         return json.load(f)
 
