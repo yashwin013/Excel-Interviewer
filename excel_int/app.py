@@ -2,8 +2,10 @@
 
 import streamlit as st
 import json
+import os # <-- NEW: Import the 'os' library
 from agents import answer_evaluator_agent, report_generator_agent, conversational_feedback_agent
 from utils import text_to_speech
+from ui_styles import css
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -12,23 +14,31 @@ st.set_page_config(
     layout="centered"
 )
 
-# Apply the custom CSS from ui_styles.py
-from ui_styles import css
+# Apply the custom CSS
 st.markdown(css, unsafe_allow_html=True)
 
 # --- HEADER ---
 st.title("Excel Interviewer")
-st.markdown("Welcome! This AI will assess your Excel skills. Let's get started.")
+st.markdown("Welcome! This AI will assess your Excel skills. Please introduce yourself to begin.")
 
 # --- MAIN APP LOGIC ---
 
-def load_questions(file_path="questions.json"):
+# --- UPDATED FUNCTION ---
+def load_questions():
+    """Loads questions from questions.json, finding it relative to this script."""
+    # Get the directory of the current script (app.py)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Join the script directory with the filename
+    file_path = os.path.join(script_dir, "questions.json")
+    
     with open(file_path, 'r') as f:
         return json.load(f)
 
+# --- INITIALIZATION ---
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    st.session_state.questions = load_questions()
+    # The call to load_questions no longer needs an argument
+    st.session_state.questions = load_questions() 
     st.session_state.question_index = 0
     st.session_state.interview_phase = "introduction" 
     
@@ -36,15 +46,13 @@ if "messages" not in st.session_state:
     welcome_audio = text_to_speech(welcome_message)
     st.session_state.messages.append({"role": "assistant", "content": welcome_message, "audio": welcome_audio})
 
-# --- DISPLAY CHAT HISTORY (with standard st.audio) ---
+# (The rest of your app.py file remains exactly the same...)
+# --- DISPLAY CHAT HISTORY ---
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message['content'])
-        # Check if the stored message has audio
         if "audio" in message and message["audio"]:
-            # Rewind the audio stream before playing
             message["audio"].seek(0)
-            # Use the standard, large st.audio player
             st.audio(message["audio"], format='audio/mp3', autoplay=True)
 
 # Main logic based on interview phase...
@@ -84,7 +92,7 @@ elif st.session_state.interview_phase == "questions":
             next_q_audio = text_to_speech(next_question)
             st.session_state.messages.append({"role": "assistant", "content": next_question, "audio": next_q_audio})
         else:
-            end_message = "That was the last question. Thank you! I will now generate your final performance report."
+            end_message = "That was the last question. Thank you for completing the interview! I will now generate your final performance report."
             end_audio = text_to_speech(end_message)
             st.session_state.messages.append({"role": "assistant", "content": end_message, "audio": end_audio})
             st.session_state.interview_phase = "report"
