@@ -27,7 +27,7 @@ st.markdown("Welcome! This AI will assess your Excel skills. Please introduce yo
 def load_questions():
     """Loads the entire structured question bank from questions.json."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(script_dir, "questions.json")
+    file_path = os.path.join(script_dir, "excel_int/questions.json")
     with open(file_path, 'r') as f:
         return json.load(f)
 
@@ -146,4 +146,3 @@ elif st.session_state.interview_phase == "report":
             st.rerun()
     else:
         st.success("Report generation complete!")
-
