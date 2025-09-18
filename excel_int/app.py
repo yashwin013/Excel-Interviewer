@@ -4,7 +4,6 @@ import streamlit as st
 import json
 from agents import answer_evaluator_agent, report_generator_agent, conversational_feedback_agent
 from utils import text_to_speech
-from ui_styles import css
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -13,13 +12,13 @@ st.set_page_config(
     layout="centered"
 )
 
-# Apply the custom CSS
+# Apply the custom CSS from ui_styles.py
+from ui_styles import css
 st.markdown(css, unsafe_allow_html=True)
 
-# --- HEADER (Now without the container div) ---
-st.title("📊 Excel Interviewer Pro")
-st.markdown("Welcome! This AI will assess your Excel skills. Please introduce yourself to begin.")
-
+# --- HEADER ---
+st.title("Excel Interviewer")
+st.markdown("Welcome! This AI will assess your Excel skills. Let's get started.")
 
 # --- MAIN APP LOGIC ---
 
@@ -34,16 +33,19 @@ if "messages" not in st.session_state:
     st.session_state.interview_phase = "introduction" 
     
     welcome_message = "Hello! I'm your AI-powered Excel mock interviewer. To begin, could you please tell me a little bit about yourself?"
-    st.session_state.messages.append({"role": "assistant", "content": welcome_message})
-    st.session_state.welcome_audio = text_to_speech(welcome_message)
+    welcome_audio = text_to_speech(welcome_message)
+    st.session_state.messages.append({"role": "assistant", "content": welcome_message, "audio": welcome_audio})
 
-# Display chat history
-for i, message in enumerate(st.session_state.messages):
+# --- DISPLAY CHAT HISTORY (with standard st.audio) ---
+for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        # REMOVED the <div class='glassmorphism'> wrapper for a cleaner look
-        st.markdown(message['content']) 
-        if i == 0 and st.session_state.welcome_audio:
-            st.audio(st.session_state.welcome_audio, format='audio/mp3', autoplay=True)
+        st.markdown(message['content'])
+        # Check if the stored message has audio
+        if "audio" in message and message["audio"]:
+            # Rewind the audio stream before playing
+            message["audio"].seek(0)
+            # Use the standard, large st.audio player
+            st.audio(message["audio"], format='audio/mp3', autoplay=True)
 
 # Main logic based on interview phase...
 if st.session_state.interview_phase == "introduction":
@@ -51,10 +53,12 @@ if st.session_state.interview_phase == "introduction":
         st.session_state.messages.append({"role": "user", "content": prompt})
         
         acknowledgment = "Great, thank you. Let's dive into the first technical question."
-        st.session_state.messages.append({"role": "assistant", "content": acknowledgment})
+        ack_audio = text_to_speech(acknowledgment)
+        st.session_state.messages.append({"role": "assistant", "content": acknowledgment, "audio": ack_audio})
         
         first_question = st.session_state.questions[0]["question"]
-        st.session_state.messages.append({"role": "assistant", "content": first_question})
+        q_audio = text_to_speech(first_question)
+        st.session_state.messages.append({"role": "assistant", "content": first_question, "audio": q_audio})
 
         st.session_state.interview_phase = "questions"
         st.rerun()
@@ -71,15 +75,18 @@ elif st.session_state.interview_phase == "questions":
             evaluation = answer_evaluator_agent(question, rubric, prompt)
             conversational_feedback = conversational_feedback_agent(question, prompt, evaluation)
         
-        st.session_state.messages.append({"role": "assistant", "content": conversational_feedback})
+        feedback_audio = text_to_speech(conversational_feedback)
+        st.session_state.messages.append({"role": "assistant", "content": conversational_feedback, "audio": feedback_audio})
         
         st.session_state.question_index += 1
         if st.session_state.question_index < len(st.session_state.questions):
             next_question = st.session_state.questions[st.session_state.question_index]["question"]
-            st.session_state.messages.append({"role": "assistant", "content": next_question})
+            next_q_audio = text_to_speech(next_question)
+            st.session_state.messages.append({"role": "assistant", "content": next_question, "audio": next_q_audio})
         else:
-            end_message = "That was the last question. Thank you for completing the interview! I will now generate your final performance report."
-            st.session_state.messages.append({"role": "assistant", "content": end_message})
+            end_message = "That was the last question. Thank you! I will now generate your final performance report."
+            end_audio = text_to_speech(end_message)
+            st.session_state.messages.append({"role": "assistant", "content": end_message, "audio": end_audio})
             st.session_state.interview_phase = "report"
         
         st.rerun()
@@ -89,7 +96,8 @@ elif st.session_state.interview_phase == "report":
         with st.spinner("Compiling your performance summary..."):
             final_report = report_generator_agent(st.session_state.messages)
             st.session_state.final_report = final_report
-            st.session_state.messages.append({"role": "assistant", "content": final_report})
+            report_audio = text_to_speech(final_report)
+            st.session_state.messages.append({"role": "assistant", "content": final_report, "audio": report_audio})
             st.rerun()
     else:
         st.success("Report generation complete!")
